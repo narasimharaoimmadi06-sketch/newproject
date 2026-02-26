@@ -1,20 +1,26 @@
-// Fake database for production without PostgreSQL
+// Mock database (PostgreSQL disabled)
 
 console.log("⚠ Running without real database. Using mock DB.");
 
-export const db = {
-  insert: () => ({
-    values: async () => {
+const mockInsert = () => ({
+  values: () => ({
+    returning: async () => {
       return [];
     },
   }),
-  select: () => ({
-    from: () => ({
-      where: async () => {
-        return [];
-      },
-    }),
+});
+
+const mockSelect = () => ({
+  from: () => ({
+    where: async () => {
+      return [];
+    },
   }),
+});
+
+export const db = {
+  insert: mockInsert,
+  select: mockSelect,
 } as any;
 
 export const pool = null as any;
