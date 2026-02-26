@@ -1,7 +1,20 @@
-// Database disabled for production (no PostgreSQL)
+// Fake database for production without PostgreSQL
 
-console.log("⚠ Running without database connection.");
+console.log("⚠ Running without real database. Using mock DB.");
 
-// Export empty placeholders so app doesn't crash
+export const db = {
+  insert: () => ({
+    values: async () => {
+      return [];
+    },
+  }),
+  select: () => ({
+    from: () => ({
+      where: async () => {
+        return [];
+      },
+    }),
+  }),
+} as any;
+
 export const pool = null as any;
-export const db = null as any;
