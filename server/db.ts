@@ -1,13 +1,7 @@
-import { drizzle } from "drizzle-orm/node-postgres";
-import pg from "pg";
-import * as schema from "@shared/schema";
+// Database disabled for production (no PostgreSQL)
 
-const { Pool } = pg;
+console.log("⚠ Running without database connection.");
 
-if (!process.env.DATABASE_URL) {
-  console.warn("DATABASE_URL not set. Running without database.");
-}
-
-
-export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-export const db = drizzle(pool, { schema });
+// Export empty placeholders so app doesn't crash
+export const pool = null as any;
+export const db = null as any;
